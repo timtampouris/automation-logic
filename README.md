@@ -1,1 +1,1 @@
-# automation-logic
+# Terraform for Hetzner
