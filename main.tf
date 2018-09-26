@@ -1,8 +1,3 @@
-# Configure the Hetzner Cloud Provider
-provider "hcloud" {
-  token = "${var.hcloud_token}"
-}
-
 # Create a server
 # Various options:
 # server_type = "cx21"
