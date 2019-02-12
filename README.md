@@ -31,6 +31,14 @@ resource "hcloud_server" "webtest" {
   location    = "hel1"
 }
 
+# Provides a Hetzner Cloud Floating IP Assignment to assign a Floating IP
+# to a Hetzner Cloud Server. Deleting a Floating IP Assignment will
+# unassign the Floating IP from the Server.
+resource "hcloud_floating_ip_assignment" "main" {
+  floating_ip_id = "${hcloud_floating_ip.master.id}"
+  server_id = "${hcloud_server.webtest.id}"
+}
+
 # Provides a Hetzner Cloud Floating IP to represent
 # a publicly-accessible static IP addresses that
 # can be mapped to one of your Servers
