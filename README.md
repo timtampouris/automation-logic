@@ -22,6 +22,14 @@ Create a cloud instance on Hetzner Cloud with Floating IP
 # iso         = "CentOS-7-x86_64-NetInstall-1708.iso" Name of the mounted ISO image
 # image       = "ubuntu-18.04"
 
+# Provides a Hetzner Cloud Floating IP Assignment to assign a Floating IP
+# to a Hetzner Cloud Server. Deleting a Floating IP Assignment will
+# unassign the Floating IP from the Server.
+resource "hcloud_floating_ip_assignment" "main" {
+  floating_ip_id = "${hcloud_floating_ip.master.id}"
+  server_id = "${hcloud_server.webtest.id}"
+}
+
 resource "hcloud_server" "webtest" {
   name        = "webtest"
   image       = "centos-7"
@@ -29,14 +37,6 @@ resource "hcloud_server" "webtest" {
   keep_disk   = "true"
   datacenter  = "hel1-dc2"
   location    = "hel1"
-}
-
-# Provides a Hetzner Cloud Floating IP Assignment to assign a Floating IP
-# to a Hetzner Cloud Server. Deleting a Floating IP Assignment will
-# unassign the Floating IP from the Server.
-resource "hcloud_floating_ip_assignment" "main" {
-  floating_ip_id = "${hcloud_floating_ip.master.id}"
-  server_id = "${hcloud_server.webtest.id}"
 }
 
 # Provides a Hetzner Cloud Floating IP to represent
